@@ -31,7 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-# куски H2
-/testdb.mv.db
-/testdb.trace.db
