@@ -8,4 +8,6 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 
     @Override
     List<Person> findAll();
+
+    boolean deleteById(int id);
 }

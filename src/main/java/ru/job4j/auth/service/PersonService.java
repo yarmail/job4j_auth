@@ -23,11 +23,11 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
-    public Person save(Person person) {
-        return personRepository.save(person);
+    public Optional<Person> save(Person person) {
+        return Optional.ofNullable(personRepository.save(person));
     }
 
-    public void delete(Person person) {
-
+    public boolean deleteById(int id) {
+        return personRepository.deleteById(id);
     }
 }
