@@ -17,11 +17,13 @@ public class PersonController {
     private  final PersonService personService;
     private BCryptPasswordEncoder encoder;
 
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService,
+                            BCryptPasswordEncoder encoder) {
         this.personService = personService;
+        this.encoder = encoder;
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<Person> findAll() {
         return personService.findAll();
     }
@@ -54,7 +56,10 @@ public class PersonController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/sing-up")
+    /**
+     * Пароли хешируются и прямом виде не хранятся в базе.
+     */
+    @PostMapping("/sign-up")
     public ResponseEntity<Void> signUp(@RequestBody Person person) {
         person.setPassword(encoder.encode(person.getPassword()));
         personService.save(person);

@@ -24,10 +24,14 @@ public class PersonService {
     }
 
     public Optional<Person> save(Person person) {
-        return Optional.ofNullable(personRepository.save(person));
+        return Optional.of(personRepository.save(person));
     }
 
     public boolean deleteById(int id) {
         return personRepository.deleteById(id);
+    }
+
+    public Optional<Person> findByLogin(String login) {
+        return personRepository.findByLogin(login);
     }
 }
