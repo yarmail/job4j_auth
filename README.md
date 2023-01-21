@@ -1,5 +1,8 @@
-Пример REST сервиса с использованием ResponseEntity </br>
+Небольшой REST сервис по обработке данных пользователей </br>
+с использованием следующих технологий:</br>
 
-Самый быстрый способ сделать REST сервис - это создать сервис на Spring boot.
-Давайте создадим новый проект job4j_auth, в качестве сборщика будем использовать Maven, 
-а также используем инструмент Spring Initialzr, который упростить создание схемы стандартного SpringBoot проекта.
+Spring Boot, Spring Security, Spring JPA, </br>
+JWT, DTO, ResponseEntity, ExceptionHandler
+
+
+
