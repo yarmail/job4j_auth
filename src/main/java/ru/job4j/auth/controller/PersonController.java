@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import ru.job4j.auth.dto.PersonDTO;
 import ru.job4j.auth.model.Person;
 import ru.job4j.auth.service.PersonService;
 
@@ -57,6 +58,22 @@ public class PersonController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "No person found for update");
         }
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Пример использования DTO для форм где нужны просто логин и пароль
+     */
+    @PatchMapping("/")
+    public ResponseEntity<String> updatePassword(@RequestBody PersonDTO personDTO) {
+        Optional<Person> optionalPerson = personService.findByLogin(personDTO.getLogin());
+        if (optionalPerson.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "No person found for update");
+        }
+        Person person = optionalPerson.get();
+        person.setPassword(personDTO.getPassword());
+        personService.save(person);
         return ResponseEntity.ok().build();
     }
 
