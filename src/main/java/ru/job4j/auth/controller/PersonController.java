@@ -12,6 +12,7 @@ import ru.job4j.auth.service.PersonService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,8 @@ public class PersonController {
      * Пример использования DTO для форм где нужны просто логин и пароль
      */
     @PatchMapping("/")
-    public ResponseEntity<String> updatePassword(@RequestBody PersonDTO personDTO) {
+    public ResponseEntity<String> updatePassword(@RequestBody @Valid
+                                                 PersonDTO personDTO) {
         Optional<Person> optionalPerson = personService.findByLogin(personDTO.getLogin());
         if (optionalPerson.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -90,7 +92,8 @@ public class PersonController {
      * Пароли хешируются и прямом виде не хранятся в базе.
      */
     @PostMapping("/sign-up")
-    public ResponseEntity<Void> signUp(@RequestBody Person person) {
+    public ResponseEntity<Void> signUp(@RequestBody @Valid
+                                       Person person) {
         var username = person.getLogin();
         var password = person.getPassword();
         if (username == null || password == null) {
